@@ -1,5 +1,4 @@
 function scan() {
-  console.log('scanning...');
   var divs = document.getElementsByTagName("div");
 
   for(var i = 0; i < divs.length; i++) {
@@ -14,9 +13,12 @@ function scan() {
 
     let parser = new DOMParser();
     let doc = parser.parseFromString(divs[i].innerText, "text/html");
-    for (var item of doc.querySelectorAll("span")) {
-      if (item.innerText.startsWith("Next Available")) {
-        console.log(divs[i].innerText);
+    for (var item of doc.querySelectorAll("body")) {
+      if (item.innerText.includes("Next Available")) {
+        console.log("================");
+        var d = new Date();
+        var n = d.toLocaleTimeString();
+        console.log(n, divs[i].innerText);
       }
     }
   }
